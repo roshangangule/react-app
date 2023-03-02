@@ -1,7 +1,22 @@
+import { useState } from "react";
+import { Backdrop } from "./Backdrop";
+import { Modal } from "./Modal";
+
 export const Todo: React.FC<{ text: any }> = (props) => {
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const deleteHandler = () => {
-    console.log('Clicked!')
-    console.log(props.text)
+    setModalIsOpen(true);
+  }
+  const handleModalIsOpen = () => {
+    setModalIsOpen(false);
+  }
+  const handleOnCancel = () => {
+    setModalIsOpen(false);
+  }
+  const handleOnConfirm = () => {
+    setModalIsOpen(false);
   }
 
   return (
@@ -12,6 +27,9 @@ export const Todo: React.FC<{ text: any }> = (props) => {
           Delete
         </button>
       </div>
+      {modalIsOpen && <Modal onCancel={handleOnCancel} onConfirm={handleOnConfirm}/>}
+      {modalIsOpen && <Backdrop onCancel = {handleModalIsOpen}/>}
+      
     </div>
   );
 };
