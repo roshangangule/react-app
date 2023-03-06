@@ -1,8 +1,19 @@
+import { useContext } from "react";
 import { MeetupModel } from "../../models/MeetupModel";
+import { FavoritesContext } from "../../store/favorites-context";
 import { Card } from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 
 export const MeetupItem: React.FC<{ meetupModel: MeetupModel }> = (props) => {
+
+  const favoritesCtx = useContext(FavoritesContext);
+
+  const itemIsFavorites = favoritesCtx.itemIsFavorites(props.meetupModel.id);
+
+  const toggleFavoriteStatusHandler = () => {
+    
+  }
+
   return (
     <Card>
       <li className={classes.item}>
@@ -15,7 +26,7 @@ export const MeetupItem: React.FC<{ meetupModel: MeetupModel }> = (props) => {
           <p>{props.meetupModel.description}</p>
         </div>
         <div className={classes.actions}>
-          <button>To Favorites</button>
+          <button onClick={toggleFavoriteStatusHandler}>To Favorites</button>
         </div>
       </li>
     </Card>
